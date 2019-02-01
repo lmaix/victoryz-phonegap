@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'Burbank';
+	src: url('fonts/BurbankBigCondensed-Bold.eot');
+	src: local('â˜º'), url('fonts/BurbankBigCondensed-Bold.woff') format('woff'), url('fonts/BurbankBigCondensed-Bold.ttf') format('truetype'), url('fonts/BurbankBigCondensed-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@media (min-width: 576px) {
+
+	/* .sm */
+}
+
+@media (min-width: 768px) {
+
+	/* .md */	
+	.md\:text-6xl {
+		font-size:56px !important;
+		line-height:1;
+	}
+}
+
+@media (min-width: 992px) {
+
+	/* .lg */	
+	.lg\:text-8xl {
+		font-size:84px !important;
+		line-height:1.11905;
+	}
+}
+
+@media (min-width: 1200px) {
+
+	/* .xl */
+}

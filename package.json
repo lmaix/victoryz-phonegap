@@ -25,10 +25,12 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-vibration": {}
-    }
+    },
+    "platforms": [
+      "android"
+    ]
   },
   "dependencies": {
-    "cordova-android": "^8.1.0",
     "cordova-plugin-compat": "^1.2.0"
   }
 }

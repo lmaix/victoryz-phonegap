@@ -7,6 +7,18 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "Share.Victoryz"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "Share.Victoryz"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "Share.Victoryz"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "Share.Victoryz"
+    },
     "cordova-plugin-firebasex": {
       "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
       "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
@@ -24,21 +36,6 @@
       "ANDROID_GSON_VERSION": "2.8.6",
       "PACKAGE_NAME": "Share.Victoryz"
     },
-    "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "Share.Victoryz"
     },
@@ -46,6 +43,9 @@
       "PACKAGE_NAME": "Share.Victoryz"
     },
     "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "Share.Victoryz"
+    },
+    "cordova-plugin-media-capture": {
       "PACKAGE_NAME": "Share.Victoryz"
     },
     "cordova-plugin-network-information": {

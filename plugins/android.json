@@ -1,43 +1,48 @@
 {
-  "prepare_queue": {
-    "installed": [],
-    "uninstalled": []
-  },
-  "config_munge": {
-    "files": {}
-  },
-  "installed_plugins": {
-    "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "Share.Victoryz"
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
     },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "Share.Victoryz"
+    "config_munge": {
+        "files": {}
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "Share.Victoryz"
+    "installed_plugins": {
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "Share.Victoryz"
+        }
     },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-globalization": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    }
-  },
-  "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "Share.Victoryz"
-    }
-  }
+    "dependent_plugins": {}
 }

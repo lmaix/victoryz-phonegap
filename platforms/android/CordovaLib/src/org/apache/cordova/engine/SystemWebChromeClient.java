@@ -21,11 +21,11 @@ package org.apache.cordova.engine;
 import java.util.Arrays;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -61,17 +61,15 @@ public class SystemWebChromeClient extends WebChromeClient {
 
     // the video progress view
     private View mVideoProgressView;
-
+    
     private CordovaDialogsHelper dialogsHelper;
-    private Context appContext;
 
     private WebChromeClient.CustomViewCallback mCustomViewCallback;
     private View mCustomView;
 
     public SystemWebChromeClient(SystemWebViewEngine parentEngine) {
         this.parentEngine = parentEngine;
-        appContext = parentEngine.webView.getContext();
-        dialogsHelper = new CordovaDialogsHelper(appContext);
+        dialogsHelper = new CordovaDialogsHelper(parentEngine.webView.getContext());
     }
 
     /**
@@ -142,7 +140,6 @@ public class SystemWebChromeClient extends WebChromeClient {
      * Handle database quota exceeded notification.
      */
     @Override
-    @SuppressWarnings("deprecation")
     public void onExceededDatabaseQuota(String url, String databaseIdentifier, long currentQuota, long estimatedSize,
             long totalUsedQuota, WebStorage.QuotaUpdater quotaUpdater)
     {
@@ -150,6 +147,21 @@ public class SystemWebChromeClient extends WebChromeClient {
         quotaUpdater.updateQuota(MAX_QUOTA);
     }
 
+    // console.log in api level 7: http://developer.android.com/guide/developing/debug-tasks.html
+    // Expect this to not compile in a future Android release!
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onConsoleMessage(String message, int lineNumber, String sourceID)
+    {
+        //This is only for Android 2.1
+        if(android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.ECLAIR_MR1)
+        {
+            LOG.d(LOG_TAG, "%s: Line %d : %s", sourceID, lineNumber, message);
+            super.onConsoleMessage(message, lineNumber, sourceID);
+        }
+    }
+
+    @TargetApi(8)
     @Override
     public boolean onConsoleMessage(ConsoleMessage consoleMessage)
     {
@@ -162,32 +174,21 @@ public class SystemWebChromeClient extends WebChromeClient {
     /**
      * Instructs the client to show a prompt to ask the user to set the Geolocation permission state for the specified origin.
      *
-     * This also checks for the Geolocation Plugin and requests permission from the application  to use Geolocation.
-     *
      * @param origin
      * @param callback
      */
     public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
         super.onGeolocationPermissionsShowPrompt(origin, callback);
         callback.invoke(origin, true, false);
-        //Get the plugin, it should be loaded
-        CordovaPlugin geolocation = parentEngine.pluginManager.getPlugin("Geolocation");
-        if(geolocation != null && !geolocation.hasPermisssion())
-        {
-            geolocation.requestPermissions(0);
-        }
-
     }
-
+    
     // API level 7 is required for this, see if we could lower this using something else
     @Override
-    @SuppressWarnings("deprecation")
     public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback) {
         parentEngine.getCordovaWebView().showCustomView(view, callback);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onHideCustomView() {
         parentEngine.getCordovaWebView().hideCustomView();
     }
@@ -200,9 +201,9 @@ public class SystemWebChromeClient extends WebChromeClient {
      */
     public View getVideoLoadingProgressView() {
 
-        if (mVideoProgressView == null) {
+        if (mVideoProgressView == null) {            
             // Create a new Loading view programmatically.
-
+            
             // create the linear layout
             LinearLayout layout = new LinearLayout(parentEngine.getView().getContext());
             layout.setOrientation(LinearLayout.VERTICAL);
@@ -213,12 +214,12 @@ public class SystemWebChromeClient extends WebChromeClient {
             ProgressBar bar = new ProgressBar(parentEngine.getView().getContext());
             LinearLayout.LayoutParams barLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             barLayoutParams.gravity = Gravity.CENTER;
-            bar.setLayoutParams(barLayoutParams);
+            bar.setLayoutParams(barLayoutParams);   
             layout.addView(bar);
-
+            
             mVideoProgressView = layout;
         }
-    return mVideoProgressView;
+    return mVideoProgressView; 
     }
 
     // <input type=file> support:
@@ -227,11 +228,11 @@ public class SystemWebChromeClient extends WebChromeClient {
     public void openFileChooser(ValueCallback<Uri> uploadMsg) {
         this.openFileChooser(uploadMsg, "*/*");
     }
-
+    
     public void openFileChooser( ValueCallback<Uri> uploadMsg, String acceptType ) {
         this.openFileChooser(uploadMsg, acceptType, null);
     }
-
+    
     public void openFileChooser(final ValueCallback<Uri> uploadMsg, String acceptType, String capture)
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -241,7 +242,7 @@ public class SystemWebChromeClient extends WebChromeClient {
             @Override
             public void onActivityResult(int requestCode, int resultCode, Intent intent) {
                 Uri result = intent == null || resultCode != Activity.RESULT_OK ? null : intent.getData();
-                LOG.d(LOG_TAG, "Receive file chooser URL: " + result);
+                Log.d(LOG_TAG, "Receive file chooser URL: " + result);
                 uploadMsg.onReceiveValue(result);
             }
         }, intent, FILECHOOSER_RESULTCODE);
@@ -250,39 +251,18 @@ public class SystemWebChromeClient extends WebChromeClient {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onShowFileChooser(WebView webView, final ValueCallback<Uri[]> filePathsCallback, final WebChromeClient.FileChooserParams fileChooserParams) {
-        // Check if multiple-select is specified
-        Boolean selectMultiple = false;
-        if (fileChooserParams.getMode() == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE) {
-            selectMultiple = true;
-        }
         Intent intent = fileChooserParams.createIntent();
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, selectMultiple);
         try {
             parentEngine.cordova.startActivityForResult(new CordovaPlugin() {
                 @Override
                 public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-                    Uri[] result = null;
-                    if (resultCode ==  Activity.RESULT_OK && intent != null) {
-                        if (intent.getClipData() != null) {
-                            // handle multiple-selected files
-                            final int numSelectedFiles = intent.getClipData().getItemCount();
-                            result = new Uri[numSelectedFiles];
-                            for (int i = 0; i < numSelectedFiles; i++) {
-                                result[i] = intent.getClipData().getItemAt(i).getUri();
-                                LOG.d(LOG_TAG, "Receive file chooser URL: " + result[i]);
-                            }
-                        }
-                        else if (intent.getData() != null) {
-                            // handle single-selected file
-                            result = WebChromeClient.FileChooserParams.parseResult(resultCode, intent);
-                            LOG.d(LOG_TAG, "Receive file chooser URL: " + result);
-                        }
-                    }
+                    Uri[] result = WebChromeClient.FileChooserParams.parseResult(resultCode, intent);
+                    Log.d(LOG_TAG, "Receive file chooser URL: " + result);
                     filePathsCallback.onReceiveValue(result);
                 }
             }, intent, FILECHOOSER_RESULTCODE);
         } catch (ActivityNotFoundException e) {
-            LOG.w("No activity found to handle file chooser intent.", e);
+            Log.w("No activity found to handle file chooser intent.", e);
             filePathsCallback.onReceiveValue(null);
         }
         return true;
@@ -291,7 +271,7 @@ public class SystemWebChromeClient extends WebChromeClient {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onPermissionRequest(final PermissionRequest request) {
-        LOG.d(LOG_TAG, "onPermissionRequest: " + Arrays.toString(request.getResources()));
+        Log.d(LOG_TAG, "onPermissionRequest: " + Arrays.toString(request.getResources()));
         request.grant(request.getResources());
     }
 

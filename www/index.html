@@ -22,149 +22,33 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="msapplication-tap-highlight" content="no" />
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
-  <!-- Good default declaration:
-  * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-  * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-  * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-      * Enable inline JS: add 'unsafe-inline' to default-src
-      * Enable eval(): add 'unsafe-eval' to default-src
-  * Create your own at http://cspisawesome.com
-  -->
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-  <title>Victoryz</title>
-  <link rel="stylesheet" href="https://victoryz.co/cdn/css/reset.css">
-  <link rel="stylesheet" href="https://victoryz.co/cdn/css/app.css">
-  <link rel="stylesheet" href="https://victoryz.co/cdn/css/minirefresh.css" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
-  <link rel="stylesheet" href="https://victoryz.co/cdn/css/android.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
+    <meta http-equiv="refresh" content="0; url=https://victoryz.co/android">
 </head>
 
 <body>
-
-<div id="home" class="tab hometab swiper-container">
-  <div style="position:absolute;top:30px;z-index:10;width:100%">
-    <table align="center" cellpadding="5" class="relative">
-      <tr>
-        <td width="50%">
-          <img id="homefollowing" src="/cdn/img/app/following@3x.png" height="40" onclick="Home.reload('following')" class="3d homealpha">
-        </td>
-        <td width="50%">
-          <div style="height:12px;width:1px;background:white;position:absolute;top:20px;margin-left:-5px"></div>
-          <img id="homeforyou" src="/cdn/img/app/foryou@3x.png" height="40" onclick="Home.reload('for_you')" class="3d">
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div id="homeline"></div>
-  <div id="homecontent" class="swiper-wrapper">
-    <div class="swiper-slide noselect">
-      <img id="loading" src="/cdn/img/app/like@3x.png" height="40" width="40">
-      <img id="loading" src="/cdn/img/app/liked@3x.png" height="40" width="40">
-      <img id="loading" src="/cdn/img/app/like.gif" height="40" width="40">
-    </div>
-  </div>
-</div>
-<div id="homepages" class="page homepage"></div>
-
-
-
-
-
-
-
-<div id="discover" class="tab discovertab none"></div>
-<div id="discoverpages" class="page discoverpage"></div>
-
-
-
-
-
-
-
-
-<div id="fortnite" class="tab none">
-  <div class="cpad center white pixel20">FORTNITE</div>
-  <div id="fortniterefresh" class="minirefresh-wrap">
-    <div class="minirefresh-scroll">
-      <div id="fortnitecontent"></div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-<div id="me" class="tab none">
-  <div class="cpad center white pixel20">ME</div>
-  <input type="file" accept=".mp4,.mov">
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<header class="noselect">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td width="20%" align="center" class="relative" onclick="Nav.tab('home')">
-        <div class="menuicon" style="background-image: url(/cdn/img/app/menu.home@3x.png)"></div>
-        <div id="menuhome" class="menuicon menuiconhover" style="background-image: url(/cdn/img/app/menu.homeon@3x.png)"></div>
-      </td>
-      <td width="20%" align="center" class="relative" onclick="Nav.tab('discover')">
-        <div class="menuicon" style="background-image: url(/cdn/img/app/menu.discover@3x.png)"></div>
-        <div id="menudiscover" class="menuicon menuiconhover none" style="background-image: url(/cdn/img/app/menu.discoveron@3x.png)"></div>
-      </td>
-      <td width="20%" align="center" class="relative" onclick="Nav.tab('create')">
-        <div class="menuicon" style="background-image: url(/cdn/img/app/menu.create@3x.png)"></div>
-      </td>
-      <td width="20%" align="center" class="relative" onclick="Nav.tab('fortnite')">
-        <div class="menuicon" style="background-image: url(/cdn/img/app/menu.fortnite@3x.png)"></div>
-        <div id="menufortnite" class="menuicon menuiconhover none" style="background-image: url(/cdn/img/app/menu.fortniteon@3x.png)"></div>
-      </td>
-      <td width="20%" align="center" class="relative" onclick="Nav.tab('me')">
-        <div class="menuicon" style="background-image: url(/cdn/img/app/menu.me@3x.png)"></div>
-        <div id="menume" class="menuicon menuiconhover none" style="background-image: url(/cdn/img/app/menu.meon@3x.png)"></div>
-      </td>
-    </tr>
-  </table>
-</header>
-
-
-
-<div id="overlay" onclick="PopBottom.hide()"></div>
-<div id="popbottom"></div>
-
-
-
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript">
-app.initialize()
-</script>
-
-
-<script src="https://victoryz.co/cdn/js/jquery.js"></script>
-<script src="https://victoryz.co/cdn/js/minirefresh.js"></script>
-<script src="https://unpkg.com/swiper/js/swiper.js"></script>
-<script src="https://victoryz.co/cdn/js/android.js"></script>
-
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
 </body>
+
 </html>

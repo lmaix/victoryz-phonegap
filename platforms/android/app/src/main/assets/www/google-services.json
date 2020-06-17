@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "291055487689",
+    "firebase_url": "https://victoryz-app.firebaseio.com",
+    "project_id": "victoryz-app",
+    "storage_bucket": "victoryz-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291055487689:android:3d39f33292aaa47da65b18",
+        "android_client_info": {
+          "package_name": "Share.Victoryz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291055487689-ivrb13uv4cjidsdujq2bcpkkhk1b4517.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKAAT6e4Yf-H21gxzD3IptthVt0F_bLSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291055487689-ivrb13uv4cjidsdujq2bcpkkhk1b4517.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291055487689-4a2fgn4oqi5kqsmq1qtpric86hvapi54.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Share.Victoryz",
+                "app_store_id": "1445356833"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
